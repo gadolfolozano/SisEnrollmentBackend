@@ -11,4 +11,12 @@ public class AlunoDao {
 		session.close();
 		return village;
 	}
+	
+	public Aluno getAlunoByCpfAndPassword(String cpf, String password) {
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		AlunoMapper mapper = session.getMapper(AlunoMapper.class);
+		Aluno aluno = mapper.getAlunoByCpfAndPassword(cpf, password);
+		session.close();
+		return aluno;
+	}
 }
