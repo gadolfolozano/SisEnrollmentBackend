@@ -16,5 +16,6 @@
   </environments>
   <mappers>
     <mapper class="pe.com.gadolfolozano.app.AlunoMapper" />
+    <mapper class="pe.com.gadolfolozano.app.UserSessionMapper" />
   </mappers>
 </configuration>

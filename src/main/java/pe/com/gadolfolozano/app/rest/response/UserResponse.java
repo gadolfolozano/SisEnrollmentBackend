@@ -1,9 +1,6 @@
-package pe.com.gadolfolozano.app;
+package pe.com.gadolfolozano.app.rest.response;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class User {
+public class UserResponse {
 
 	private String cpf;
 	private String name;
@@ -12,9 +9,8 @@ public class User {
 	private String city;
 	private String phone;
 	private String email;
-	private String password;
 
-	public User() {
+	public UserResponse() {
 		// Required
 	}
 
@@ -72,14 +68,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }
