@@ -1,4 +1,4 @@
-package pe.com.gadolfolozano.app.util;
+package pe.com.gadolfolozano.app.database;
 
 import java.io.IOException;
 import java.io.InputStream;

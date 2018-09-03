@@ -1,10 +1,10 @@
-package pe.com.gadolfolozano.app;
+package pe.com.gadolfolozano.app.database.entity;
 
-public class UserSession {
+public class SessionEntity {
 	private String userId;
 	private String token;
 
-	public UserSession() {
+	public SessionEntity() {
 		// Required
 	}
 

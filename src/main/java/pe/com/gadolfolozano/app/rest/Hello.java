@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import pe.com.gadolfolozano.app.Aluno;
+import pe.com.gadolfolozano.app.model.UserModel;
 import pe.com.gadolfolozano.app.repository.UserDataRepository;
 import pe.com.gadolfolozano.app.repository.UserRepository;
 
@@ -27,8 +27,8 @@ public class Hello {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayPlainTextHello() {
 		UserRepository userRepository = new UserDataRepository();
-		Aluno aluno = userRepository.getUser("70115020683");
-		return "Hello Jersey" + aluno.getNome();
+		UserModel user = userRepository.getUser("70115020683");
+		return "Hello Jersey" + user.getName();
 	}
 
 	// This method is called if XML is request
@@ -36,9 +36,9 @@ public class Hello {
 	@Produces(MediaType.TEXT_XML)
 	public String sayXMLHello() {
 		UserRepository userRepository = new UserDataRepository();
-		Aluno aluno = userRepository.getUser("70115020683");
+		UserModel user = userRepository.getUser("70115020683");
 
-		return "<?xml version=\"1.0\"?>" + "<hello> Hello" + aluno.getNome() + "</hello>";
+		return "<?xml version=\"1.0\"?>" + "<hello> Hello" + user.getName() + "</hello>";
 	}
 
 	// This method is called if HTML is request
@@ -46,10 +46,10 @@ public class Hello {
 	@Produces(MediaType.TEXT_HTML)
 	public String sayHtmlHello() {
 		UserRepository userRepository = new UserDataRepository();
-		Aluno aluno = userRepository.getUser("70115020683");
+		UserModel user = userRepository.getUser("70115020683");
 
-		return "<html> " + "<title>" + "Hello " + aluno.getNome() + "</title>" + "<body><h1>" + "Hello "
-				+ aluno.getNome() + "</body></h1>" + "</html> ";
+		return "<html> " + "<title>" + "Hello " + user.getName() + "</title>" + "<body><h1>" + "Hello "
+				+ user.getName() + "</body></h1>" + "</html> ";
 	}
 
 }

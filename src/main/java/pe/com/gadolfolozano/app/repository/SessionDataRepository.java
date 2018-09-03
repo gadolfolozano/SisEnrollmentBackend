@@ -1,6 +1,6 @@
 package pe.com.gadolfolozano.app.repository;
 
-import pe.com.gadolfolozano.app.UserSession;
+import pe.com.gadolfolozano.app.model.SessionModel;
 import pe.com.gadolfolozano.app.repository.datasource.SessionDataStoreFactory;
 
 public class SessionDataRepository implements SessionRepository {
@@ -12,7 +12,7 @@ public class SessionDataRepository implements SessionRepository {
 	}
 
 	@Override
-	public UserSession getSession(String userId) {
+	public SessionModel getSession(String userId) {
 		SessionRepository sessionRepository = sessionDataStoreFactory.create();
 		return sessionRepository.getSession(userId);
 	}

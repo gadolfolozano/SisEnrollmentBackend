@@ -2,26 +2,34 @@ package pe.com.gadolfolozano.app.repository.datasource;
 
 import org.apache.ibatis.session.SqlSession;
 
-import pe.com.gadolfolozano.app.UserSession;
-import pe.com.gadolfolozano.app.UserSessionMapper;
+import pe.com.gadolfolozano.app.database.MyBatisUtil;
+import pe.com.gadolfolozano.app.database.entity.SessionEntity;
+import pe.com.gadolfolozano.app.database.mybatismapper.SessionEntityMapper;
+import pe.com.gadolfolozano.app.mapper.SessionMapper;
+import pe.com.gadolfolozano.app.model.SessionModel;
 import pe.com.gadolfolozano.app.repository.SessionRepository;
-import pe.com.gadolfolozano.app.util.MyBatisUtil;
 
 public class DataBaseSessionDataSource implements SessionRepository{
+	
+	private SessionMapper mapper;
+	
+	public DataBaseSessionDataSource() {
+		mapper = new SessionMapper();
+	}
 
 	@Override
-	public UserSession getSession(String userId) {
+	public SessionModel getSession(String userId) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		UserSessionMapper mapper = session.getMapper(UserSessionMapper.class);
-		UserSession userSession = mapper.getUserSession(userId);
+		SessionEntityMapper entityMapper = session.getMapper(SessionEntityMapper.class);
+		SessionEntity userSession = entityMapper.getUserSession(userId);
 		session.close();
-		return userSession;
+		return mapper.toModel(userSession);
 	}
 
 	@Override
 	public int updateToken(String userId, String token) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		UserSessionMapper mapper = session.getMapper(UserSessionMapper.class);
+		SessionEntityMapper mapper = session.getMapper(SessionEntityMapper.class);
 		int result = mapper.updateToken(userId, token);
 		session.commit();
 		session.close();
@@ -31,7 +39,7 @@ public class DataBaseSessionDataSource implements SessionRepository{
 	@Override
 	public int createSession(String userId, String token) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		UserSessionMapper mapper = session.getMapper(UserSessionMapper.class);
+		SessionEntityMapper mapper = session.getMapper(SessionEntityMapper.class);
 		int result = mapper.createSession(userId, token);
 		session.commit();
 		session.close();

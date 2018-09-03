@@ -2,29 +2,38 @@ package pe.com.gadolfolozano.app.repository.datasource;
 
 import org.apache.ibatis.session.SqlSession;
 
-import pe.com.gadolfolozano.app.Aluno;
-import pe.com.gadolfolozano.app.AlunoMapper;
+import pe.com.gadolfolozano.app.database.entity.AlunoEntity;
+import pe.com.gadolfolozano.app.database.MyBatisUtil;
+import pe.com.gadolfolozano.app.database.mybatismapper.AlunoEntityMapper;
+import pe.com.gadolfolozano.app.mapper.UserMapper;
+import pe.com.gadolfolozano.app.model.UserModel;
 import pe.com.gadolfolozano.app.repository.UserRepository;
-import pe.com.gadolfolozano.app.util.MyBatisUtil;
 
 public class DataBaseUserDataStore implements UserRepository{
-
-	@Override
-	public Aluno getUser(String id) {
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		AlunoMapper mapper = session.getMapper(AlunoMapper.class);
-		Aluno user = mapper.getAluno(id);
-		session.close();
-		return user;
+	
+	UserMapper userMapper;
+	
+	public DataBaseUserDataStore() {
+		super();
+		userMapper = new UserMapper();
 	}
 
 	@Override
-	public Aluno getUser(String cpf, String password) {
+	public UserModel getUser(String id) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		AlunoMapper mapper = session.getMapper(AlunoMapper.class);
-		Aluno aluno = mapper.getAlunoByCpfAndPassword(cpf, password);
+		AlunoEntityMapper mapper = session.getMapper(AlunoEntityMapper.class);
+		AlunoEntity user = mapper.getAluno(id);
 		session.close();
-		return aluno;
+		return userMapper.toModel(user);
+	}
+
+	@Override
+	public UserModel getUser(String cpf, String password) {
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		AlunoEntityMapper mapper = session.getMapper(AlunoEntityMapper.class);
+		AlunoEntity aluno = mapper.getAlunoByCpfAndPassword(cpf, password);
+		session.close();
+		return userMapper.toModel(aluno);
 	}
 
 }

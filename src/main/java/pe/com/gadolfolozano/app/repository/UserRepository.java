@@ -1,9 +1,9 @@
 package pe.com.gadolfolozano.app.repository;
 
-import pe.com.gadolfolozano.app.Aluno;
+import pe.com.gadolfolozano.app.model.UserModel;
 
 public interface UserRepository {
-	Aluno getUser(String id);
+	UserModel getUser(String id);
 
-	Aluno getUser(String cpf, String password);
+	UserModel getUser(String id, String password);
 }

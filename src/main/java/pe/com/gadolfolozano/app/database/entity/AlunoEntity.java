@@ -1,10 +1,10 @@
-package pe.com.gadolfolozano.app;
+package pe.com.gadolfolozano.app.database.entity;
 
-public class Aluno {
+public class AlunoEntity {
 	private String cpf;
 	private String nome;
 
-	private Aluno() {
+	public AlunoEntity() {
 		// Requiered
 	}
 

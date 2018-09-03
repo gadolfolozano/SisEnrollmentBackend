@@ -1,6 +1,6 @@
 package pe.com.gadolfolozano.app.repository;
 
-import pe.com.gadolfolozano.app.Aluno;
+import pe.com.gadolfolozano.app.model.UserModel;
 import pe.com.gadolfolozano.app.repository.datasource.UserDataStoreFactory;
 
 public class UserDataRepository implements UserRepository {
@@ -12,15 +12,15 @@ public class UserDataRepository implements UserRepository {
 	}
 	
 	@Override
-	public Aluno getUser(String id) {
+	public UserModel getUser(String id) {
 		UserRepository userRepository = userDataStoreFactory.create();
 		return userRepository.getUser(id);
 	}
 
 	@Override
-	public Aluno getUser(String cpf, String password) {
+	public UserModel getUser(String id, String password) {
 		UserRepository userRepository = userDataStoreFactory.create();
-		return userRepository.getUser(cpf, password);
+		return userRepository.getUser(id, password);
 	}
 
 }

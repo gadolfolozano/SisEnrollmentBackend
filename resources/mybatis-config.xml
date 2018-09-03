@@ -15,7 +15,7 @@
     </environment>
   </environments>
   <mappers>
-    <mapper class="pe.com.gadolfolozano.app.AlunoMapper" />
-    <mapper class="pe.com.gadolfolozano.app.UserSessionMapper" />
+    <mapper class="pe.com.gadolfolozano.app.database.mybatismapper.AlunoEntityMapper" />
+    <mapper class="pe.com.gadolfolozano.app.database.mybatismapper.SessionEntityMapper" />
   </mappers>
 </configuration>
