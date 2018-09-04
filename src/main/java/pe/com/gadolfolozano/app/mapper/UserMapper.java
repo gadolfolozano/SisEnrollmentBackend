@@ -16,6 +16,11 @@ public class UserMapper {
 			
 			model.setId(entity.getCpf());
 			model.setName(entity.getNome());
+			model.setAddress(entity.getEndereco());
+			model.setState(entity.getEstado());
+			model.setCity(entity.getMunicipio());
+			model.setPhone(entity.getTelefone());
+			model.setEmail(entity.getEmail());
 		}
 		
 		return model;

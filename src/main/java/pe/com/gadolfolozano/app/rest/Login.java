@@ -59,15 +59,28 @@ public class Login {
 					.build();
 		}
 
-		UserResponse userResponse = new UserResponse();
-		userResponse.setName(userModel.getName());
-		userResponse.setCpf(userModel.getId());
+		return Response.ok(getLoginSuccesResponse(userModel, token), MediaType.APPLICATION_JSON).build();
+	}
 
+	private LoginResponse getLoginSuccesResponse(UserModel userModel, String token) {
 		LoginResponse response = new LoginResponse();
-		response.setToken(token);
-		response.setUser(userResponse);
 
-		return Response.ok(response, MediaType.APPLICATION_JSON).build();
+		if (userModel != null) {
+			UserResponse userResponse = new UserResponse();
+			userResponse.setName(userModel.getName());
+			userResponse.setCpf(userModel.getId());
+			userResponse.setAddress(userModel.getAddress());
+			userResponse.setState(userModel.getState());
+			userResponse.setCity(userModel.getCity());
+			userResponse.setPhone(userModel.getPhone());
+			userResponse.setEmail(userModel.getEmail());
+
+			response.setUser(userResponse);
+		}
+
+		response.setToken(token);
+
+		return response;
 	}
 
 }
