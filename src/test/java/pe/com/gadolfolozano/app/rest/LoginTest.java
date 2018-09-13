@@ -1,7 +1,6 @@
 package pe.com.gadolfolozano.app.rest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import javax.ws.rs.core.Response;
 
