@@ -22,7 +22,7 @@ public class DataBaseUserDataStore implements UserRepository{
 	public UserModel getUser(String email, String password) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		AlunoEntityMapper mapper = session.getMapper(AlunoEntityMapper.class);
-		AlunoEntity aluno = mapper.getAlunoByCpfAndPassword(email, password);
+		AlunoEntity aluno = mapper.getAlunoByEmailAndPassword(email, password);
 		session.close();
 		return userMapper.toModel(aluno);
 	}

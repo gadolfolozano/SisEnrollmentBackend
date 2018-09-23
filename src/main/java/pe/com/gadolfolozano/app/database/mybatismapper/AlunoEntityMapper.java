@@ -20,6 +20,6 @@ public interface AlunoEntityMapper {
       })
 	@Select("SELECT cpf, nome_aluno, endereco, estado, municipio, telefone, email "
 			+ "from Aluno WHERE UPPER(email) = UPPER(#{email}) and senha = #{password}")
-	AlunoEntity getAlunoByCpfAndPassword(@Param("email") String email, @Param("password") String password);
+	AlunoEntity getAlunoByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 	
 }
