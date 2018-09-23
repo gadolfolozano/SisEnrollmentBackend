@@ -22,7 +22,7 @@ public class LoginTest {
 	public void testDoLoginSuccess() {
 		Login loginWs = new Login();
 		LoginRequest request = new LoginRequest();
-		request.setCpf("70115020683");
+		request.setEmail("GADOLFOLOZANO@GMAIL.COM");
 		request.setPassword("7c4a8d09ca3762af61e59520943dc26494f8941b");
 		Response response = loginWs.doLogin(request);
 		assertEquals("doLogin() valid request should return 200",

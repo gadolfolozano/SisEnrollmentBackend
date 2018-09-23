@@ -30,7 +30,7 @@ public class ErrorResponse {
 	
 
 	private static final String ERROR_MESSAGE_GENERIC = "An error occurred";
-	private static final String ERROR_MESSAGE_INVALID_CREDENTIALS = "cpf or password were incorrect";
+	private static final String ERROR_MESSAGE_INVALID_CREDENTIALS = "email or password were incorrect";
 	
 	
 	public static ErrorResponse getInvalidCredentialsError() {

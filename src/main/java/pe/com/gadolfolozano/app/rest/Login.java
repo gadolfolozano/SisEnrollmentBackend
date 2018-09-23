@@ -24,7 +24,7 @@ public class Login {
 	public Response doLogin(LoginRequest loginRequest) {
 
 		UserRepository userRepository = new UserDataRepository();
-		UserModel userModel = userRepository.getUser(loginRequest.getCpf(), loginRequest.getPassword());
+		UserModel userModel = userRepository.getUser(loginRequest.getEmail(), loginRequest.getPassword());
 
 		if (userModel == null) {
 			return Response.status(Response.Status.NOT_FOUND)
@@ -43,13 +43,13 @@ public class Login {
 		}
 
 		SessionRepository sessionRepository = new SessionDataRepository();
-		SessionModel sessionModel = sessionRepository.getSession(loginRequest.getCpf());
+		SessionModel sessionModel = sessionRepository.getSession(userModel.getId());
 
 		int afectedRows;
 		if (sessionModel != null) {
-			afectedRows = sessionRepository.updateToken(loginRequest.getCpf(), token);
+			afectedRows = sessionRepository.updateToken(userModel.getId(), token);
 		} else {
-			afectedRows = sessionRepository.createSession(loginRequest.getCpf(), token);
+			afectedRows = sessionRepository.createSession(userModel.getId(), token);
 		}
 
 		if (afectedRows == 0) {

@@ -19,19 +19,10 @@ public class DataBaseUserDataStore implements UserRepository{
 	}
 
 	@Override
-	public UserModel getUser(String id) {
+	public UserModel getUser(String email, String password) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		AlunoEntityMapper mapper = session.getMapper(AlunoEntityMapper.class);
-		AlunoEntity user = mapper.getAluno(id);
-		session.close();
-		return userMapper.toModel(user);
-	}
-
-	@Override
-	public UserModel getUser(String cpf, String password) {
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		AlunoEntityMapper mapper = session.getMapper(AlunoEntityMapper.class);
-		AlunoEntity aluno = mapper.getAlunoByCpfAndPassword(cpf, password);
+		AlunoEntity aluno = mapper.getAlunoByCpfAndPassword(email, password);
 		session.close();
 		return userMapper.toModel(aluno);
 	}

@@ -10,17 +10,11 @@ public class UserDataRepository implements UserRepository {
 	public UserDataRepository() {
 		userDataStoreFactory = new UserDataStoreFactory();
 	}
-	
-	@Override
-	public UserModel getUser(String id) {
-		UserRepository userRepository = userDataStoreFactory.create();
-		return userRepository.getUser(id);
-	}
 
 	@Override
-	public UserModel getUser(String id, String password) {
+	public UserModel getUser(String email, String password) {
 		UserRepository userRepository = userDataStoreFactory.create();
-		return userRepository.getUser(id, password);
+		return userRepository.getUser(email, password);
 	}
 
 }
