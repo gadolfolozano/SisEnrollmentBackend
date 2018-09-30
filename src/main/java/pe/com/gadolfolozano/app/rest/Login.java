@@ -16,16 +16,25 @@ import pe.com.gadolfolozano.app.rest.response.ErrorResponse;
 import pe.com.gadolfolozano.app.rest.response.LoginResponse;
 import pe.com.gadolfolozano.app.rest.response.UserResponse;
 import pe.com.gadolfolozano.app.util.AuthUtil;
-
+/**
+ * Define o ws de login
+ */
 @Path("/login")
 public class Login {
 
+	/**
+	 * Funcao login usa o metodo POST
+	 * e recebe como body um objeto de tipo LoginRequest
+	 */
 	@POST
 	public Response doLogin(LoginRequest loginRequest) {
 
+		// UserRepository realiza o query na BD 
+		// para obter o usuario com o email e password fornecidos
 		UserRepository userRepository = new UserDataRepository();
 		UserModel userModel = userRepository.getUser(loginRequest.getEmail(), loginRequest.getPassword());
 
+		//Caso nao econtrar o usuario, retorna um erro
 		if (userModel == null) {
 			return Response.status(Response.Status.NOT_FOUND)
 					.entity(ErrorResponse.getInvalidCredentialsError())
@@ -33,6 +42,7 @@ public class Login {
 					.build();
 		}
 
+		//Gera o token do usuario
 		String token = AuthUtil.generateToken(userModel.getId());
 
 		if (token == null) {
@@ -42,6 +52,7 @@ public class Login {
 					.build();
 		}
 
+		//Salva o token do usuario na sessao
 		SessionRepository sessionRepository = new SessionDataRepository();
 		SessionModel sessionModel = sessionRepository.getSession(userModel.getId());
 
@@ -51,7 +62,8 @@ public class Login {
 		} else {
 			afectedRows = sessionRepository.createSession(userModel.getId(), token);
 		}
-
+		
+		//Se ocorre um erro ao salvar a sessao, retorna um erro
 		if (afectedRows == 0) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 					.entity(ErrorResponse.getGenericError())
@@ -59,7 +71,10 @@ public class Login {
 					.build();
 		}
 
-		return Response.ok(getLoginSuccesResponse(userModel, token), MediaType.APPLICATION_JSON).build();
+		//Entrega o usuario logado com sucesso
+		return Response.ok(getLoginSuccesResponse(userModel, token),
+				MediaType.APPLICATION_JSON)
+				.build();
 	}
 
 	private LoginResponse getLoginSuccesResponse(UserModel userModel, String token) {
